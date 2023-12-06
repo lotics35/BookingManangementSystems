@@ -1,0 +1,67 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-box-container {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.profile-box {
+  width: 400px;
+  text-align: center;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+/* .profile-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 350px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+  margin-bottom: 5px; 
+} */
+
+.profile-details {
+  margin-bottom: 20px;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-actions button {
+  padding: 10px;
+  cursor: pointer;
+  margin: 15px;
+}
+
+.edit-profile-form{
+  width: 400px;
+}
+
+.booking-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.booking-container {
+  max-width: 800px; /* Adjust the max-width as needed */
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

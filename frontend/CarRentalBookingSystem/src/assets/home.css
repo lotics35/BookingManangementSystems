@@ -1,0 +1,29 @@
+.home-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.half {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.left-half {
+    background-color: white; /* #f2f2f2 */
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+    height: 100%; /* Set a fixed height for the left-half container */
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+}
+
+.right-half {
+    border: 1px solid black;
+    border-radius: 5px;
+}
