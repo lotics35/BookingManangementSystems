@@ -24,8 +24,7 @@ export const Home = () => {
 
   return (
     <div className="main">
-      <div class="left-half">
-      <Container style={{padding:'0px', height: '100%'}}>
+      <Container style={{padding:'0px'}}>
         <Carousel fade>
           <Carousel.Item>
             <img src={ExampleCarouselImage1}></img>
@@ -57,13 +56,12 @@ export const Home = () => {
           </Carousel.Item>
         </Carousel>
       </Container>
-      </div>
-      <div className="right-half">
-        <h1 class="htag"><center>Let's go and Book a car now for your vacation!</center></h1>
+      <div className="half right-half">
+        <h1><center>Let's go and Book a car now for your vacation!</center></h1>
           {showLogin ? (
           <>
             <Login />
-            <center class="x">
+            <center>
               <p>
                 Don't have an account?{' '}
                 <Button onClick={toggleForm}>Sign Up</Button>
@@ -73,7 +71,7 @@ export const Home = () => {
           ) : (
           <>
             <SignUp />
-            <center class="x">
+            <center>
               <p>
                 Already have an account?{' '}
                 <Button onClick={toggleForm}>Log In</Button>
@@ -82,7 +80,7 @@ export const Home = () => {
           </>
         )}
       </div>
-      </div>
+    </div>
   )
 }
 

@@ -1,28 +1,5 @@
-
 .App {
   text-align: center;
-}
-
-.backgroundcontainer{
-  background: url('./backgroundpic.jpg') center/cover fixed;
-  margin-top: 15px;
-  height: 120vh;
-  filter: blur(10px);
-  overflow: hidden;
-  opacity: 60%;
-}
-
-.main{
-  position: absolute;
-  top: 60px;
-  background-color: #ffffff;
-}
-
-.maindashboard{
-  position: absolute;
-  top: 60px;
-  background-color: #ffffff;
-  width: 1320px;
 }
 
 .App-logo {
@@ -62,22 +39,24 @@
 
 .navcontainer{
   box-sizing: border-box;
-  background-color: rgb(250, 235, 221);
+  color: rgb(33, 37, 41);
   display: flex;
   flex-wrap: nowrap;
   font-weight: 400;
-  height: 60px;
+  height: 40px;
   line-height: 24px;
   margin-left: 0px;
   margin-right: 0px;
   padding-left: 0px;
   padding-right: 0px;
   text-align: center;
-  width: 100%;
-  border-bottom-style: solid;
-  border-width: 0.5px;
+  width: 100%
 }
 
 .carouselcontent{
-  margin-top: 0px;
+  margin-top: 20px;
+}
+
+.hotelcontent{
+  margin-top: 20px;
 }

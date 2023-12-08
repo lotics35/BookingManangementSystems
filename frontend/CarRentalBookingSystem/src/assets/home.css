@@ -13,25 +13,15 @@
 }
 
 .left-half {
-    background-color: white;  /*#f2f2f2 */
+    background-color: white; /* #f2f2f2 */
+    border: 1px solid black;
+    color: black;
     height: 100%; /* Set a fixed height for the left-half container */
     display: flex;
     flex-direction: column;
-    margin: auto;
-    width: 1000;
+    margin-right: 5px;
 }
 
 .right-half {
-    padding-top: 0px;
-    padding-bottom: 5px;
-    background-color: white;
-    margin: auto;
-    height: 100%;
-    flex-direction: column;
-}
-.htag{
-    padding: 20px;
-}
-.x{
-    margin: 20px;
+    border: 1px solid black;
 }

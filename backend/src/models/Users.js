@@ -64,11 +64,19 @@ async function getAllUsers(connection) {
   return rows;
 }
 
+async function deleteUserById(connection, userId) {
+  // Delete user from the database
+  const [rows] = await connection.execute('DELETE FROM users WHERE id = ?', [userId]);
+  // Check if the delete was successful
+  return rows.affectedRows > 0;
+}
+
 module.exports = {
   createUser,
   getUserByEmail,
   getUserById,
   updateUserProfile,
   checkIfUserExists,
-  getAllUsers
+  getAllUsers,
+  deleteUserById,
 };

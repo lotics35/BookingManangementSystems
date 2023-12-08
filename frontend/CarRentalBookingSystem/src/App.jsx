@@ -1,27 +1,29 @@
 // App.js
+
 import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './components/Utilities/Navbar';
+import NavMenu from './components/navbar';
 import Home from './components/Home';
 import VehicleList from './components/VehicleList';
 import About from './components/About';
 import Profile from './components/Profile';
 import AdminLogin from './components/AdminLogin'; 
 import AdminDashboard from './components/AdminDashboard';
-
+import Background from './components/background';
 
 const App = () => {
-  const [isAdminLoggedIn, setAdminLoggedIn] = useState(false);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
-  // Function to set admin login status
-  const handleAdminLogin = (loggedIn) => {
-    setAdminLoggedIn(loggedIn);
+  const handleAdminLogin = () => {
+    setIsAdminLoggedIn(true);
   };
+
   return (
     <>
-      <Navbar />
+      <NavMenu />
+      <Background/>
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -29,14 +31,8 @@ const App = () => {
           <Route path="/About" element={<About />} />
           <Route path="/Profile" element={<Profile />} />
           {/* Add routes for AdminLogin and AdminDashboard */}
-          <Route
-          path="/AdminLogin"
-          element={<AdminLogin onLogin={handleAdminLogin} />}
-          />
-          <Route
-          path="/AdminDash"
-          element={<AdminDashboard isAdminLoggedIn={isAdminLoggedIn} />}
-          />
+          <Route path="/AdminLogin" element={<AdminLogin onLogin={handleAdminLogin}/>} />
+          <Route path="/AdminDashboard" element={<AdminDashboard isAdminLoggedIn={isAdminLoggedIn} onLogin={handleAdminLogin} />}/>
         </Routes>
       </div>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />

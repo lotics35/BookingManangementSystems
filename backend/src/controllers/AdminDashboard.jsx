@@ -5,9 +5,6 @@ import ManageVehicles from './Utilities/ManageVehicles';
 import ManageDrivers from './Utilities/ManageDrivers';
 import ManageBookings from './Utilities/ManageBooking';
 import ManagePayment from './Utilities/ManagePayment';
-import Container from 'react-bootstrap/esm/Container';
-import './App.css';
-import '../assets/home.css'
 
 const AdminDashboard = ({ isAdminLoggedIn }) => {
   const navigate = useNavigate();
@@ -30,8 +27,7 @@ const AdminDashboard = ({ isAdminLoggedIn }) => {
   };
 
   return (
-    <div className='maindashboard'>
-      <Container>
+    <div>
       {isAdminLoggedIn ? (
         <>
           <h2>Admin Dashboard</h2>
@@ -59,7 +55,6 @@ const AdminDashboard = ({ isAdminLoggedIn }) => {
           <button onClick={() => navigate('/AdminLogin')}>Go to Admin Login</button>
         </div>
       )}
-      </Container>
     </div>
   );
 };

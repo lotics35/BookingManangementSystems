@@ -26,6 +26,7 @@ const VehicleList = () => {
     }, []);
   
     return (
+      <div className="main">
         <div className="vehicle-list-container">
           <h1>Vehicle List</h1>
           <ul>
@@ -49,6 +50,7 @@ const VehicleList = () => {
               </li>
             ))}
           </ul>
+        </div>
         </div>
       );
     };

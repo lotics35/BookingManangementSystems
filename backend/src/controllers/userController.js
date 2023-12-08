@@ -1,6 +1,6 @@
 // controllers/userController.js
 const validator = require('validator');
-const { createUser, getUserByEmail,getUserById,updateUserProfile,checkIfUserExists, getAllUsers } = require('../models/Users');
+const { createUser, getUserByEmail, getUserById, updateUserProfile, checkIfUserExists, getAllUsers, deleteUserById } = require('../models/Users');
 const bcrypt = require('bcrypt');
 
 const signup = async (req, res) => {
@@ -170,6 +170,64 @@ const getAllUsersController = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, updateProfile, getUserProfile,getAllUsersController };
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const connection = req.db;
+
+    // Debug message: Log the user ID being processed
+    console.log(`Deleting user with ID: ${userId}`);
+
+    // Check if the user exists
+    const existingUser = await getUserById(connection, userId);
+    if (!existingUser) {
+      // Debug message: Log that the user was not found
+      console.log(`User with ID ${userId} not found`);
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Debug message: Log the existing user details
+    console.log('Existing user details:', existingUser);
+
+    // Delete the user
+    const isDeleteSuccessful = await deleteUserById(connection, userId);
+
+    if (isDeleteSuccessful) {
+      // Debug message: Log that the user was deleted successfully
+      console.log(`User with ID ${userId} deleted successfully`);
+      return res.status(200).json({ message: 'User deleted successfully' });
+    } else {
+      // Debug message: Log that the deletion failed
+      console.log(`Failed to delete user with ID: ${userId}`);
+      return res.status(500).json({ message: 'Failed to delete user' });
+    }
+  } catch (error) {
+    // Debug message: Log the full error details
+    console.error('Error deleting user:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+const editUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const connection = req.db;
+
+    // Check if the user exists
+    const existingUser = await getUserById(connection, userId);
+    if (!existingUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Send the user details in the response
+    const { name, email, contactNumber } = existingUser;
+    res.json({ name, email, contactNumber });
+  } catch (error) {
+    console.error('Error fetching user data for edit:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+module.exports = { signup, login, updateProfile, getUserProfile,getAllUsersController, deleteUser, editUser };
 
 
