@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ManageUsers from './Utilities/ManageUsers'; // Import other CRUD components
 import ManageVehicles from './Utilities/ManageVehicles';
+import ManageDrivers from './Utilities/ManageDrivers';
 
 const AdminDashboard = ({ isAdminLoggedIn }) => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const AdminDashboard = ({ isAdminLoggedIn }) => {
           {/* Add buttons to dynamically render corresponding components */}
           <div>
             <button onClick={() => renderComponent(<ManageUsers />)}>Manage Users</button>
-            <button onClick={() => renderComponent()}>Manage Drivers</button>
+            <button onClick={() => renderComponent(<ManageDrivers />)}>Manage Drivers</button>
             <button onClick={() => renderComponent(<ManageVehicles />)}>Manage Vehicles</button>
             {/* Add more buttons as needed */}
           </div>
