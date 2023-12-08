@@ -7,6 +7,7 @@
   const userRoutes = require('./src/routes/user');
   const vehicleRoutes = require('./src/routes/vehicle');
   const driverRoutes = require('./src/routes/driver');
+  const bookingRoutes = require('./src/routes/booking')
   const app = express();
   const PORT = process.env.PORT || 8081;
 
@@ -36,6 +37,8 @@
   app.use('/api/vehicle', vehicleRoutes);
     // Use driverRouter for /api/driver routes
   app.use('/api/driver', driverRoutes);
+   //Use bookingRouter for /api/booking routes
+  app.use('/api/booking', bookingRoutes);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

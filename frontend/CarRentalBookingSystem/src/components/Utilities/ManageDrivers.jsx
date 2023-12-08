@@ -10,7 +10,7 @@ const ManageDrivers = () => {
 
   const fetchDrivers = async () => {
     try {
-      const response = await fetch('http://localhost:8081/api/driver/drivers');
+      const response = await fetch('http://localhost:8081/api/driver/all');
       const data = await response.json();
       setDrivers(data);
     } catch (error) {

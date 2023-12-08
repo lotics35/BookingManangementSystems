@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 05:17 PM
+-- Generation Time: Dec 08, 2023 at 08:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `chasinghorizons`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `bookingId` int(11) NOT NULL,
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL,
+  `vehicleId` int(11) DEFAULT NULL,
+  `pickupLocation` varchar(255) NOT NULL,
+  `pickupDate` date NOT NULL,
+  `dropoffLocation` varchar(255) NOT NULL,
+  `dropoffDate` date NOT NULL,
+  `additionalRequests` text DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`bookingId`, `startDate`, `endDate`, `vehicleId`, `pickupLocation`, `pickupDate`, `dropoffLocation`, `dropoffDate`, `additionalRequests`, `userId`) VALUES
+(1, '2023-12-10', '2023-12-15', 1, 'Pickup Location', '2023-12-10', 'Dropoff Location', '2023-12-15', 'Additional requests or comments', 1);
 
 -- --------------------------------------------------------
 
@@ -49,6 +75,29 @@ INSERT INTO `driver` (`DriverID`, `FullName`, `LicenseNumber`, `LicenseExpiryDat
 (1, 'John Doe', 'ABC123', '2023-12-31', '555-1234', 'john.doe@email.com', '123 Main St, Cityville', '1990-05-15', 'US', '2010-01-01', 1),
 (2, 'Jane Smith', 'XYZ789', '2022-11-30', '555-5678', 'jane.smith@email.com', '456 Oak St, Townsville', '1985-08-22', 'UK', '2008-03-15', 0),
 (3, 'Bob Johnson', 'DEF456', '2024-06-30', '555-9876', 'bob.johnson@email.com', '789 Pine St, Villagetown', '1982-12-10', 'CA', '2005-07-20', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `paymentId` int(11) NOT NULL,
+  `bookingId` int(11) DEFAULT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `paymentDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `paymentMethod` varchar(255) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`paymentId`, `bookingId`, `amount`, `paymentDate`, `paymentMethod`, `status`, `userId`) VALUES
+(1, 1, 150.00, '2023-12-15 04:30:00', 'Credit Card', 'Completed', 1);
 
 -- --------------------------------------------------------
 
@@ -106,11 +155,27 @@ INSERT INTO `vehicle` (`Vehicle_id`, `Vehicle_name`, `description`, `Vehicle_mod
 --
 
 --
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`bookingId`),
+  ADD KEY `vehicleId` (`vehicleId`),
+  ADD KEY `userId` (`userId`);
+
+--
 -- Indexes for table `driver`
 --
 ALTER TABLE `driver`
   ADD PRIMARY KEY (`DriverID`),
   ADD UNIQUE KEY `LicenseNumber` (`LicenseNumber`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`paymentId`),
+  ADD KEY `bookingId` (`bookingId`),
+  ADD KEY `userId` (`userId`);
 
 --
 -- Indexes for table `users`
@@ -129,6 +194,18 @@ ALTER TABLE `vehicle`
 --
 
 --
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `bookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `paymentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -139,6 +216,24 @@ ALTER TABLE `users`
 --
 ALTER TABLE `vehicle`
   MODIFY `Vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`vehicleId`) REFERENCES `vehicle` (`Vehicle_id`),
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`bookingId`) REFERENCES `bookings` (`bookingId`),
+  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
