@@ -7,6 +7,11 @@ const Booking = () => {
     startDate: '',
     endDate: '',
     vehicleType: '',
+    pickupLocation: '',
+    pickupDate: '',
+    dropoffLocation: '',
+    dropoffDate: '',
+    additionalRequests: '',
   });
 
   const [vehicleTypes, setVehicleTypes] = useState([]);
@@ -35,42 +40,60 @@ const Booking = () => {
     setBookingData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle the form submission logic here
+    console.log('Form submitted:', bookingData);
+  };
+
   return (
     <div className="booking-container">
       <h1>Booking Form</h1>
-      <form className="booking-form">
+      <form className="booking-form" onSubmit={handleSubmit}>
+        {/* ... other input fields ... */}
         <label>
-          Start Date:
+          Pick-up Location:
           <input
-            type="date"
-            name="startDate"
-            value={bookingData.startDate}
+            type="text"
+            name="pickupLocation"
+            value={bookingData.pickupLocation}
             onChange={handleInputChange}
           />
         </label>
         <label>
-          End Date:
+          Pick-up Date:
           <input
             type="date"
-            name="endDate"
-            value={bookingData.endDate}
+            name="pickupDate"
+            value={bookingData.pickupDate}
             onChange={handleInputChange}
           />
         </label>
         <label>
-          Vehicle Type: <br/>
-          <select
-            name="vehicleType"
-            value={bookingData.vehicleType}
+          Drop-off Location:
+          <input
+            type="text"
+            name="dropoffLocation"
+            value={bookingData.dropoffLocation}
             onChange={handleInputChange}
-          >
-            <option value="">Select a vehicle type</option>
-            {vehicleTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+          />
+        </label>
+        <label>
+          Drop-off Date:
+          <input
+            type="date"
+            name="dropoffDate"
+            value={bookingData.dropoffDate}
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Additional Requests:
+          <textarea
+            name="additionalRequests"
+            value={bookingData.additionalRequests}
+            onChange={handleInputChange}
+          />
         </label>
         <button type="submit">Submit</button>
       </form>
