@@ -10,7 +10,7 @@ const AdminLogin = ({ onLogin }) => {
   const handleLogin = (e) => {
     e.preventDefault();
     // Validate admin credentials
-    if (username === 'admin' && password === 'adminpassword') {
+    if (username === '1' && password === '1') {
       // Call onLogin prop to set the admin status in the parent component
       onLogin();
       console.log('Redirecting to AdminDashboard');
