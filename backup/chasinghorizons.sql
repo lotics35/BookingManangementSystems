@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 09:54 AM
+-- Generation Time: Dec 08, 2023 at 05:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `chasinghorizons`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `driver`
+--
+
+CREATE TABLE `driver` (
+  `DriverID` int(11) NOT NULL,
+  `FullName` varchar(255) NOT NULL,
+  `LicenseNumber` varchar(20) NOT NULL,
+  `LicenseExpiryDate` date NOT NULL,
+  `ContactNumber` varchar(15) DEFAULT NULL,
+  `EmailAddress` varchar(255) DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `DateOfBirth` date DEFAULT NULL,
+  `Nationality` varchar(50) DEFAULT NULL,
+  `LicenseIssueDate` date DEFAULT NULL,
+  `ActiveStatus` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `driver`
+--
+
+INSERT INTO `driver` (`DriverID`, `FullName`, `LicenseNumber`, `LicenseExpiryDate`, `ContactNumber`, `EmailAddress`, `Address`, `DateOfBirth`, `Nationality`, `LicenseIssueDate`, `ActiveStatus`) VALUES
+(1, 'John Doe', 'ABC123', '2023-12-31', '555-1234', 'john.doe@email.com', '123 Main St, Cityville', '1990-05-15', 'US', '2010-01-01', 1),
+(2, 'Jane Smith', 'XYZ789', '2022-11-30', '555-5678', 'jane.smith@email.com', '456 Oak St, Townsville', '1985-08-22', 'UK', '2008-03-15', 0),
+(3, 'Bob Johnson', 'DEF456', '2024-06-30', '555-9876', 'bob.johnson@email.com', '789 Pine St, Villagetown', '1982-12-10', 'CA', '2005-07-20', 1);
 
 -- --------------------------------------------------------
 
@@ -75,6 +104,13 @@ INSERT INTO `vehicle` (`Vehicle_id`, `Vehicle_name`, `description`, `Vehicle_mod
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `driver`
+--
+ALTER TABLE `driver`
+  ADD PRIMARY KEY (`DriverID`),
+  ADD UNIQUE KEY `LicenseNumber` (`LicenseNumber`);
 
 --
 -- Indexes for table `users`
