@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../assets/profile.module.css';
 import EditProfile from './Utilities/EditProfile';
 import Booking from './Utilities/Booking';
 
 const Profile = ({ userId }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -22,6 +25,7 @@ const Profile = ({ userId }) => {
 
         if (response.status === 200) {
           setUser(response.data);
+          setIsLoggedIn(true); 
           console.log('Fetched user details:', response.data);
         } else {
           console.error('Failed to fetch user details');
@@ -47,6 +51,26 @@ const Profile = ({ userId }) => {
     await fetchUser();
   };
 
+  const handleLogout = () => {
+    // Implement logout logic here
+    // Clear user data and set login status to false
+    setUser(null);
+    setIsLoggedIn(false);
+    localStorage.removeItem('userId');
+    navigate('/');
+  }
+
+  // Conditional rendering based on login status
+  if (!isLoggedIn) {
+    // Render login component or redirect to login page
+    return (
+      <div>
+        <p>Please log in to view your profile.</p>
+        {/* You can add a login form or redirect to the login page */}
+      </div>
+    );
+  }
+
   return (
     <div className={styles['profile-container']}>
       <div className={styles['profile-box-container']}>
@@ -65,7 +89,8 @@ const Profile = ({ userId }) => {
               </p>
             </div>
             <div className={styles['profile-actions']}>
-              <button onClick={handleEdit}>Edit</button>  
+              <button onClick={handleEdit}>Edit</button>
+              <button onClick={handleLogout}>Logout</button>  
             </div>
           </div>
         )}

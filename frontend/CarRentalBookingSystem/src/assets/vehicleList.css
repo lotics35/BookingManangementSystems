@@ -1,0 +1,44 @@
+/* Add these styles to your CSS file or inline styles in React components */
+
+.vehicle-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+.vehicle-list-container ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: center;
+  }
+  
+.vehicle-list-container li {
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center; /* Center text within the card */
+  }
+  
+.vehicle-card {
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust the width as needed */
+  }
+  
+  .image-container {
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .vehicle-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  

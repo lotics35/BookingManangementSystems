@@ -2,9 +2,12 @@
 
 const express = require('express');
 const router = express.Router();
-const { getVehicleTypes } = require('../controllers/vehicleController');
+const { getVehicleTypesController, getAllVehiclesController } = require('../controllers/vehicleController');
 
 // Route for fetching vehicle types
-router.get('/types', getVehicleTypes);
+router.get('/types', getVehicleTypesController);
+
+//Route for fetching vehicle information
+router.get('/all', getAllVehiclesController);
 
 module.exports = router;

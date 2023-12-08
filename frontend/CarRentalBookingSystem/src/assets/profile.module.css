@@ -36,14 +36,14 @@
 }
 
 .profile-actions {
-  display: flex;
   justify-content: space-around;
 }
 
 .profile-actions button {
   padding: 10px;
   cursor: pointer;
-  margin: 15px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 .edit-profile-form{

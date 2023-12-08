@@ -68,7 +68,7 @@ const EditProfile = ({ onClose }) => {
 
   return (
     <div className="edit-profile-container">
-      <h1>Edit Profile</h1>
+      <h1>Edit Contact Details</h1>
       <label className="edit-profile-label">
         Name:
         <input

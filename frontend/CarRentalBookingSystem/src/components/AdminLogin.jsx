@@ -1,19 +1,20 @@
-// AdminLogin.js
-
+//AdminLogin
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Validate admin credentials
-    if (username === 'admin' && password === 'adminpassword') {
-      // Call onLogin prop to set the admin status in the parent component
-      onLogin(true);
+
+    // Simplified validation for demo purposes
+    if (username === '1' && password === '1') {
+      onLogin(true); // Call onLogin prop to set the admin status in the parent component
+      navigate('/AdminDash');
     } else {
-      // Display an error message or redirect to an error page
       console.log('Invalid admin credentials');
     }
   };

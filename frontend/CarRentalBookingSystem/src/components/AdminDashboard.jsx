@@ -1,16 +1,20 @@
-// AdminDashboard.js
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import AdminLogin from './AdminLogin';
+const AdminDashboard = ({ isAdminLoggedIn }) => {
+  const navigate = useNavigate();
 
-const AdminDashboard = () => {
-  const [isAdminLoggedIn, setAdminLoggedIn] = useState(false);
-
-  // Function to set admin login status
-  const handleAdminLogin = (loggedIn) => {
-    setAdminLoggedIn(loggedIn);
+  // Function to handle logout
+  const handleLogout = () => {
+    navigate('/AdminLogin');
   };
+
+  useEffect(() => {
+    // Redirect to AdminLogin if not logged in
+    if (!isAdminLoggedIn) {
+      navigate('/AdminLogin');
+    }
+  }, [isAdminLoggedIn, navigate]);
 
   return (
     <div>
@@ -20,8 +24,8 @@ const AdminDashboard = () => {
           {/* Add navigation links to different admin functionalities */}
           <nav>
             <ul>
-              <li><Link to="/admin/bookings">Manage Bookings</Link></li>
-              <li><Link to="/admin/vehicles">Manage Vehicles</Link></li>
+              <li><Link to="/AdminDash/bookings">Manage Bookings</Link></li>
+              <li><Link to="/AdminDash/vehicles">Manage Vehicles</Link></li>
               {/* Add more links as needed */}
             </ul>
           </nav>
@@ -31,10 +35,17 @@ const AdminDashboard = () => {
             <h3>Recent Bookings</h3>
             {/* Display recent bookings */}
           </div>
+
+          {/* Add a logout button */}
+          <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
         // Render the login form if the admin is not logged in
-        <AdminLogin onLogin={handleAdminLogin} />
+        <div>
+          <h2>Admin Login</h2>
+          {/* Assuming you have a Route set up for "/AdminLogin" in your App.js */}
+          <Link to="/AdminLogin">Go to Admin Login</Link>
+        </div>
       )}
     </div>
   );
