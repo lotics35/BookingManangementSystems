@@ -12,6 +12,7 @@ const Booking = () => {
     dropoffLocation: '',
     dropoffDate: '',
     additionalRequests: '',
+    userId: '', // Add userId to the state
   });
 
   const [vehicleTypes, setVehicleTypes] = useState([]);
@@ -33,6 +34,12 @@ const Booking = () => {
     };
 
     fetchVehicleTypes();
+
+    // Retrieve userId from localStorage
+    const storedUserId = localStorage.getItem('userId');
+
+    // Set userId in the state
+    setBookingData((prevData) => ({ ...prevData, userId: storedUserId }));
   }, []);
 
   const handleInputChange = (e) => {
@@ -40,17 +47,67 @@ const Booking = () => {
     setBookingData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the form submission logic here
-    console.log('Form submitted:', bookingData);
+
+    try {
+      // Include vehicleType in the bookingData
+      const vehicleType = document.querySelector('[name="vehicleType"]').value;
+
+      // Update bookingData with the selected vehicleType
+      setBookingData((prevData) => ({ ...prevData, vehicleType }));
+
+      // Include userId and vehicleType in the API request
+      const response = await axios.post('http://localhost:8081/api/bookings', bookingData);
+
+      if (response.status === 200) {
+        console.log('Booking data saved successfully:', response.data);
+        // Add any additional logic after successful submission
+      } else {
+        console.error('Failed to save booking data');
+      }
+    } catch (error) {
+      console.error('Error saving booking data:', error);
+    }
   };
 
   return (
     <div className="booking-container">
       <h1>Booking Form</h1>
       <form className="booking-form" onSubmit={handleSubmit}>
-        {/* ... other input fields ... */}
+        <label>
+          Start Date:
+          <input
+            type="date"
+            name="startDate"
+            value={bookingData.startDate}
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          End Date:
+          <input
+            type="date"
+            name="endDate"
+            value={bookingData.endDate}
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Vehicle Type: <br />
+          <select
+            name="vehicleType"
+            value={bookingData.vehicleType}
+            onChange={handleInputChange}
+          >
+            <option value="">Select a vehicle type</option>
+            {vehicleTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </label>
         <label>
           Pick-up Location:
           <input
