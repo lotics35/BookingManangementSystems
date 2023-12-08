@@ -4,6 +4,7 @@ import ManageUsers from './Utilities/ManageUsers'; // Import other CRUD componen
 import ManageVehicles from './Utilities/ManageVehicles';
 import ManageDrivers from './Utilities/ManageDrivers';
 import ManageBookings from './Utilities/ManageBooking';
+import ManagePayment from './Utilities/ManagePayment';
 
 const AdminDashboard = ({ isAdminLoggedIn }) => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const AdminDashboard = ({ isAdminLoggedIn }) => {
             <button onClick={() => renderComponent(<ManageDrivers />)}>Manage Drivers</button>
             <button onClick={() => renderComponent(<ManageVehicles />)}>Manage Vehicles</button>
             <button onClick={() => renderComponent(<ManageBookings />)}>Manage Bookings</button>
+            <button onClick={() => renderComponent(<ManagePayment />)}>Manage Payment</button>
             {/* Add more buttons as needed */}
           </div>
 
