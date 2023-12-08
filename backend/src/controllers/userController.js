@@ -1,6 +1,6 @@
 // controllers/userController.js
 const validator = require('validator');
-const { createUser, getUserByEmail,getUserById,updateUserProfile,checkIfUserExists } = require('../models/Users');
+const { createUser, getUserByEmail,getUserById,updateUserProfile,checkIfUserExists, getAllUsers } = require('../models/Users');
 const bcrypt = require('bcrypt');
 
 const signup = async (req, res) => {
@@ -155,6 +155,21 @@ const updateProfile = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, updateProfile, getUserProfile };
+const getAllUsersController = async (req, res) => {
+  try {
+    const connection = req.db;
+
+    // Retrieve all users from the database
+    const users = await getAllUsers(connection);
+
+    // Send the list of users in the response
+    res.status(200).json({ users });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+module.exports = { signup, login, updateProfile, getUserProfile,getAllUsersController };
 
 

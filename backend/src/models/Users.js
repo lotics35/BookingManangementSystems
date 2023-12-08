@@ -56,10 +56,19 @@ async function checkIfUserExists(connection, { email, contactNumber }) {
   return rows.length > 0;
 }
 
+async function getAllUsers(connection) {
+  // Retrieve all users from the database
+  const [rows] = await connection.execute('SELECT * FROM users');
+
+  // Return the array of users
+  return rows;
+}
+
 module.exports = {
   createUser,
   getUserByEmail,
   getUserById,
   updateUserProfile,
-  checkIfUserExists
+  checkIfUserExists,
+  getAllUsers
 };

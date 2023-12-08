@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ManageUsers from './Utilities/ManageUsers'; // Import other CRUD components
 
 const AdminDashboard = ({ isAdminLoggedIn }) => {
   const navigate = useNavigate();
+  const [selectedComponent, setSelectedComponent] = useState(null);
 
   // Function to handle logout
   const handleLogout = () => {
@@ -16,25 +18,25 @@ const AdminDashboard = ({ isAdminLoggedIn }) => {
     }
   }, [isAdminLoggedIn, navigate]);
 
+  const renderComponent = (component) => {
+    setSelectedComponent(component);
+  };
+
   return (
     <div>
       {isAdminLoggedIn ? (
         <>
           <h2>Admin Dashboard</h2>
-          {/* Add navigation links to different admin functionalities */}
-          <nav>
-            <ul>
-              <li><Link to="/AdminDash/bookings">Manage Bookings</Link></li>
-              <li><Link to="/AdminDash/vehicles">Manage Vehicles</Link></li>
-              {/* Add more links as needed */}
-            </ul>
-          </nav>
-
-          {/* Display a summary of bookings or other relevant information */}
+          {/* Add buttons to dynamically render corresponding components */}
           <div>
-            <h3>Recent Bookings</h3>
-            {/* Display recent bookings */}
+            <button onClick={() => renderComponent(<ManageUsers />)}>Manage Users</button>
+            <button onClick={() => renderComponent(/* Other component */)}>Manage Drivers</button>
+            <button onClick={() => renderComponent(/* Other component */)}>Manage Vehicles</button>
+            {/* Add more buttons as needed */}
           </div>
+
+          {/* Render the selected component */}
+          {selectedComponent && <div>{selectedComponent}</div>}
 
           {/* Add a logout button */}
           <button onClick={handleLogout}>Logout</button>
@@ -44,7 +46,7 @@ const AdminDashboard = ({ isAdminLoggedIn }) => {
         <div>
           <h2>Admin Login</h2>
           {/* Assuming you have a Route set up for "/AdminLogin" in your App.js */}
-          <Link to="/AdminLogin">Go to Admin Login</Link>
+          <button onClick={() => navigate('/AdminLogin')}>Go to Admin Login</button>
         </div>
       )}
     </div>
