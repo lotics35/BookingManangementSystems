@@ -1,9 +1,16 @@
 import React, {useState} from 'react'
-import ImageSlider from './Utilities/ImageSlider';
-import { SliderData } from './Utilities/SliderData';
 import SignUp from './Utilities/Signup';
 import Login from './Utilities/Login';
+import './App.css';
 import '../assets/home.css'
+import ExampleCarouselImage1 from './ExampleCarouselImage1.jpg'
+import ExampleCarouselImage2 from './ExampleCarouselImage2.jpg'
+import ExampleCarouselImage3 from './ExampleCarouselImage3.jpg'
+import ExampleCarouselImage4 from './ExampleCarouselImage4.jpg'
+import Carousel from 'react-bootstrap/Carousel';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/esm/Container';
+import Button from 'react-bootstrap/Button';
 
 export const Home = () => {
   const [showLogin, setShowLogin] = useState(true);
@@ -16,37 +23,66 @@ export const Home = () => {
   
 
   return (
-    <div className="home-container">
-        <div className="half left-half">
-            <ImageSlider slides={SliderData} />
-            <h1>LOREM IPSUM</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div className="half right-half">
-            <h1><center>Let's go and Book a car now for your vacation!</center></h1>
-            {showLogin ? (
+    <div className="main">
+      <div class="left-half">
+      <Container style={{padding:'0px', height: '100%'}}>
+        <Carousel fade>
+          <Carousel.Item>
+            <img src={ExampleCarouselImage1}></img>
+            <Carousel.Caption>
+              <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src={ExampleCarouselImage2}></img>
+            <Carousel.Caption>
+              <h3>Second slide label</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src={ExampleCarouselImage3}></img>
+            <Carousel.Caption>
+              <h3>Third slide label</h3>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src={ExampleCarouselImage4}></img>
+            <Carousel.Caption>
+              <h3>Fourth slide label</h3>
+              <p>Description.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+      </Container>
+      </div>
+      <div className="right-half">
+        <h1 class="htag"><center>Let's go and Book a car now for your vacation!</center></h1>
+          {showLogin ? (
           <>
             <Login />
-            <center>
-            <p>
+            <center class="x">
+              <p>
                 Don't have an account?{' '}
-                <button onClick={toggleForm}>Sign Up</button>
-            </p>
+                <Button onClick={toggleForm}>Sign Up</Button>
+              </p>
             </center>
           </>
-        ) : (
+          ) : (
           <>
             <SignUp />
-              <center>
+            <center class="x">
               <p>
                 Already have an account?{' '}
-                <button onClick={toggleForm}>Log In</button>
+                <Button onClick={toggleForm}>Log In</Button>
               </p>
             </center>
           </>
         )}
-        </div>
-    </div>
+      </div>
+      </div>
   )
 }
 
