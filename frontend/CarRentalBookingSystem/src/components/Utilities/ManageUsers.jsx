@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../../assets/manageUsers.css';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
+  const [userInfo, setUserInfo] = useState(
+    { name: '', email: '', password: '', contactNumber: '' });
 
   useEffect(() => {
     // Fetch existing users from the backend when the component mounts
     fetchUsers();
   }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo((prevState) => ({ ...prevState, [name]: value}));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userInfo);
+    axios.post('http://localhost:8081/api/user/signup' , userInfo);
+  };
 
   const fetchUsers = async () => {
     try {
@@ -50,6 +64,23 @@ const ManageUsers = () => {
           ))}
         </tbody>
       </table>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input type="text" name="name" 
+          value={userInfo.name} onChange={handleChange}/>
+        Email:
+        <input type="text" name="email" 
+          value={userInfo.email} onChange={handleChange}/>
+        Password:
+        <input type="text" name="password" 
+          value={userInfo.password} onChange={handleChange}/>
+        Contact Number:
+        <input type="text" name="contactNumber" 
+          value={userInfo.contactNumber} onChange={handleChange}/>
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
     </div>
   );
 };
