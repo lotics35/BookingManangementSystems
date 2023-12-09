@@ -54,8 +54,6 @@ const ManageUsers = () => {
     }
   };
 
-  
-
   const handleEditUser = async (user) => {
     try {
       // Extract userId from the user object

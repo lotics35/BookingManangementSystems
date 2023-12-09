@@ -37,7 +37,7 @@
   // Use vehicleRoutes for /api/vehicle routes
   app.use('/api/vehicle', vehicleRoutes);
   app.use('/api/driver', driverRoutes);
-  app.use('/api/booking/', bookingRoutes);
+  app.use('/api/booking', bookingRoutes);
   app.use('/api/payment', paymentRoutes);
 
   app.listen(PORT, () => {

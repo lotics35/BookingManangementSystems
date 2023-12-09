@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
 const ManagePayments = () => {
   const [payments, setPayments] = useState([]);
@@ -23,10 +29,10 @@ const ManagePayments = () => {
       <h3>Manage Payments</h3>
 
       {/* Display payments in a table */}
-      <table>
+      <Table striped bordered hover variant="dark">
         <thead>
           <tr>
-            <th>Payment ID</th>
+            <th>ID</th>
             <th>Booking ID</th>
             <th>Amount</th>
             <th>Payment Date</th>
@@ -34,6 +40,7 @@ const ManagePayments = () => {
             <th>Status</th>
             <th>User ID</th>
             {/* Add more fields as needed */}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -47,10 +54,20 @@ const ManagePayments = () => {
               <td>{payment.status}</td>
               <td>{payment.userId}</td>
               {/* Add more fields as needed */}
+              <td>
+                <Button variant="warning" onClick={() => handleEditPayment(payment)}>Edit</Button>
+                <Button variant="danger" onClick={() => handleDeletePayment(payment.paymentId)}>Delete</Button>
+              </td>
             </tr>
           ))}
+          <tr>
+            <td colSpan="7"></td>
+            <td>
+              <Button variant="success" onClick={{/*handleCreateBooking*/}}>Create</Button>
+            </td>
+          </tr>
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };
